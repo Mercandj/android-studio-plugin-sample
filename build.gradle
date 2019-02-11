@@ -14,6 +14,7 @@ repositories {
 }
 
 dependencies {
+    compile fileTree(dir: 'src/libs', include: ['*.jar'])
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 compileKotlin {

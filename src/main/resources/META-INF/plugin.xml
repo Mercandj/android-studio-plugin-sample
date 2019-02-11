@@ -16,9 +16,15 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+        <toolWindow id="MWM Editor"
+                    icon="/window/plus.png"
+                    anchor="right"
+                    factoryClass="com.mercandalli.android.studio.window.MwmWindowFactory"/>
     </extensions>
 
     <actions>
+
+        <!-- https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000045884-ActionPerformed-is-not-executed- -->
 
         <group id="MyPlugin.TopMenu"
                text="_MWM"
@@ -26,10 +32,25 @@
 
             <add-to-group group-id="MainMenu" anchor="last"/>
 
-            <action id="export_on_boarding"
-                    class="actions.MyAction"
-                    text="_Export on boarding"
-                    description="Export on boarding"/>
+            <action id="mwm_load_on_boarding"
+                    class="com.mercandalli.android.studio.actions.LoadOnBoardingAction"
+                    text="_Load on boarding"
+                    description="Load on boarding"
+                    icon="AllIcons.Actions.Menu_open"/>
+
+            <action id="mwm_save_on_boarding"
+                    class="com.mercandalli.android.studio.actions.SaveOnBoardingAction"
+                    text="_Save on boarding"
+                    description="Save on boarding"
+                    icon="AllIcons.Actions.Menu_saveall"/>
+
+            <separator/>
+
+            <action id="mwm_about"
+                    class="com.mercandalli.android.studio.actions.AboutAction"
+                    text="About"
+                    description="About MWM"/>
+
         </group>
 
     </actions>
