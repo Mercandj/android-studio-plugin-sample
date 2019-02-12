@@ -9,13 +9,13 @@ import javax.swing.*
 import com.intellij.openapi.application.ApplicationManager
 import org.jetbrains.android.actions.RunAndroidAvdManagerAction
 
-
 // https://github.com/JetBrains/intellij-sdk-docs/tree/master/code_samples/tool_window
 class MwmWindow(
     private val toolWindow: ToolWindow,
     private val project: Project
 ) {
 
+    private val userAction = createUserAction()
     private var loadButton: JButton? = null
     private var saveButton: JButton? = null
     private var testOnDeviceButton: JButton? = null
@@ -28,49 +28,49 @@ class MwmWindow(
     init {
         image!!.icon = ImageIcon(javaClass.getResource("/window/mwm.png"))
         image!!.text = ""
-        title!!.text = "MWM On boarding"
-        hideButton!!.addActionListener { toolWindow.hide(null) }
+        hideButton!!.addActionListener {
+            toolWindow.hide(null)
+        }
         loadButton!!.addActionListener {
-            load()
+            userAction.onLoadClicked()
         }
         saveButton!!.addActionListener {
-            save()
+            userAction.onSaveClicked()
+        }
+        uploadButton!!.addActionListener {
+            userAction.onUploadClicked()
         }
         testOnDeviceButton!!.addActionListener {
             testOnDevice()
         }
-    }
-
-    private fun load() {
-        val fileOpenManager = ApplicationGraph.getFileOpenManager()
-        fileOpenManager.open(
-            "app/src/main/res/layout/activity_main.xml",
-            project
-        )
-        ApplicationGraph.getToastManager().toast("OnBoarding loaded")
-    }
-
-    private fun save() {
-        ApplicationGraph.getToastManager().toast("OnBoarding saved")
+        userAction.onCreate()
     }
 
     private fun testOnDevice() {
-        //val actionManager = ActionManager.getInstance()
-        //actionManager.getAction("Rerun").actionPerformed()
-        //conte
-        //AnActionEvent(
-        //    null,
-        //    dataContext,
-        //    ActionPlaces.UNKNOWN,
-        //    CheckboxAction.this.getTemplatePresentation(),
-        //    actionManager,
-        //    0)
         val commandProcessor = CommandProcessor.getInstance()
         commandProcessor.executeCommand(project, {
             ApplicationManager.getApplication().runWriteAction {
                 RunAndroidAvdManagerAction().openAvdManager(project)
             }
         }, "Extract string resource", "Android Studio Plugin")
+    }
 
+    private fun createScreen() = object : MwmWindowContract.Screen {
+
+        override fun setTitle(text: String) {
+            title!!.text = text
+        }
+    }
+
+    private fun createUserAction(): MwmWindowContract.UserAction {
+        val screen = createScreen()
+        val onBoardingManager = ApplicationGraph.getOnBoardingManager()
+        val versionManager = ApplicationGraph.getVersionManager()
+        return MwmWindowPresenter(
+            screen,
+            project,
+            onBoardingManager,
+            versionManager
+        )
     }
 }

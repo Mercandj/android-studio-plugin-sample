@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>mercandalli.android-studio-plugin-sample</id>
-    <name>MWM Plugin</name>
-    <vendor email="support@musicworldmedia.com" url="https://musicworldmedia.com/">MWM</vendor>
+    <name>Mercandalli Plugin</name>
+    <vendor email="support@mercandalli.com" url="http://mercandalli.com/">MWM</vendor>
 
     <description><![CDATA[
     This plugin is a sample to create Android Studio 3.3.1 plugin.<br>
@@ -16,7 +16,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <toolWindow id="MWM Editor"
+        <toolWindow id="Mercan Editor"
                     icon="/window/plus.png"
                     anchor="right"
                     factoryClass="com.mercandalli.android.studio.window.MwmWindowFactory"/>
@@ -27,18 +27,18 @@
         <!-- https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000045884-ActionPerformed-is-not-executed- -->
 
         <group id="MyPlugin.TopMenu"
-               text="_MWM"
+               text="_Mercandalli"
                description="MyPlugin Toolbar Menu">
 
             <add-to-group group-id="MainMenu" anchor="last"/>
 
-            <action id="mwm_load_on_boarding"
+            <action id="mercan_load_on_boarding"
                     class="com.mercandalli.android.studio.actions.LoadOnBoardingAction"
                     text="_Load on boarding"
                     description="Load on boarding"
                     icon="AllIcons.Actions.Menu_open"/>
 
-            <action id="mwm_save_on_boarding"
+            <action id="mercan_save_on_boarding"
                     class="com.mercandalli.android.studio.actions.SaveOnBoardingAction"
                     text="_Save on boarding"
                     description="Save on boarding"
@@ -46,7 +46,7 @@
 
             <separator/>
 
-            <action id="mwm_about"
+            <action id="mercan_about"
                     class="com.mercandalli.android.studio.actions.AboutAction"
                     text="About"
                     description="About MWM"/>
@@ -54,5 +54,19 @@
         </group>
 
     </actions>
+
+    <application-components>
+        <component>
+            <implementation-class>com.mercandalli.android.studio.main.MainComponent</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+        <component>
+            <implementation-class>
+                com.mercandalli.android.studio.on_boarding.OnBoardingStorageComponent
+            </implementation-class>
+        </component>
+    </project-components>
 
 </idea-plugin>

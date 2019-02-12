@@ -11,7 +11,7 @@ class ToastManagerImpl : ToastManager {
         Notifications.Bus.notify(
             Notification(
                 Notifications.SYSTEM_MESSAGES_GROUP_ID,
-                "MWM",
+                "Mercandalli",
                 message,
                 NotificationType.INFORMATION
             )

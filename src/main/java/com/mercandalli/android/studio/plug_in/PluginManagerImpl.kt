@@ -7,9 +7,7 @@ class PluginManagerImpl(
 ) : PluginManager {
 
     private val id by lazy { PluginId.getId(pluginId) }
-    private val plugin by lazy { com.intellij.ide.plugins.PluginManager.getPlugin(id)!! }
-    private val versionInternal by lazy { plugin.version!! }
+    private val pluginInternal by lazy { com.intellij.ide.plugins.PluginManager.getPlugin(id)!! }
 
-    override fun getVersion() = versionInternal
-
+    override fun getPlugin() = pluginInternal
 }
