@@ -8,6 +8,6 @@ class SaveOnBoardingAction : AnAction() {
 
     override fun actionPerformed(anActionEvent: AnActionEvent) {
         val onBoardingManager = ApplicationGraph.getOnBoardingManager()
-        onBoardingManager.save(anActionEvent)
+        onBoardingManager.save(anActionEvent.project!!)
     }
 }

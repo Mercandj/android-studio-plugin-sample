@@ -8,6 +8,6 @@ class LoadOnBoardingAction : AnAction() {
 
     override fun actionPerformed(anActionEvent: AnActionEvent) {
         val onBoardingManager = ApplicationGraph.getOnBoardingManager()
-        onBoardingManager.load(anActionEvent)
+        onBoardingManager.load(anActionEvent.project!!)
     }
 }

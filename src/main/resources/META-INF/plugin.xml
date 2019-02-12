@@ -55,4 +55,18 @@
 
     </actions>
 
+    <application-components>
+        <component>
+            <implementation-class>com.mercandalli.android.studio.main.MainComponent</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+        <component>
+            <implementation-class>
+                com.mercandalli.android.studio.on_boarding.OnBoardingStorageComponent
+            </implementation-class>
+        </component>
+    </project-components>
+
 </idea-plugin>

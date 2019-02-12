@@ -1,10 +1,12 @@
 package com.mercandalli.android.studio.on_boarding
 
-import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.project.Project
 
 interface OnBoardingManager {
 
-    fun load(anActionEvent: AnActionEvent)
+    fun load(project: Project)
 
-    fun save(anActionEvent: AnActionEvent)
+    fun save(project: Project)
+
+    fun upload(project: Project)
 }
